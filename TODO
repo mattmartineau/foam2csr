@@ -1,0 +1,5 @@
+- return to FOAM2CSR vanilla
+- add documentation to all functions
+- change name of the library (or integrate into the external solver)
+- remove PETSc dependency
+- align to openFoam coding style

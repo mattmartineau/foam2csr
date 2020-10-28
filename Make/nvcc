@@ -1,0 +1,16 @@
+SUFFIXES += .cu
+SUFFIXES += .cpp
+SUFFIXES += .C
+
+NVARCH = 70
+
+NVCC        = nvcc -std=c++14 --compiler-options='-fPIC' -arch=sm_$(NVARCH)
+
+cuFLAGS     = -O3
+
+cutoo       = $(WM_SCHEDULER) $(NVCC) $(cuFLAGS) -I$(*D) ${EXE_INC} -c $*.cu -o $@
+
+$(OBJECTS_DIR)/%.o : %.cu
+	$(cutoo)
+
+LINKLIBSO   = $(NVCC) -shared

@@ -1,0 +1,24 @@
+sinclude $(GENERAL_RULES)/mplib$(WM_MPLIB)
+sinclude $(RULES)/mplib$(WM_MPLIB)
+include $(OBJECTS_DIR)/../nvcc
+
+sinclude $(GENERAL_RULES)/module-path-user
+
+/* Failsafe - default to user location */
+ifeq (,$(strip $(FOAM_MODULE_LIBBIN)))
+    FOAM_MODULE_LIBBIN = $(FOAM_USER_LIBBIN)
+endif
+
+EXE_INC = \
+    -I. \
+    -I$(CUBROOT) \
+    -I${PETSC_INC} \
+    -I${AMGX_INC} \
+    -I${SPECTRUM_MPI_HOME}/include
+
+LIB_LIBS = \
+    -lfiniteVolume \
+    -lmeshTools \
+    $(foreach dir,$(PETSC_LIB_DIR),-L$(dir)) -lpetsc \
+    -L$(AMGX_LIB) -lamgxsh
+

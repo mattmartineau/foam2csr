@@ -1,0 +1,5 @@
+src/AmgXCSRMatrix.cu
+src/AmgXMPIComms.cu
+src/AmgXSolver.cu
+
+LIB = $(FOAM_MODULE_LIBBIN)/libfoam2csr
